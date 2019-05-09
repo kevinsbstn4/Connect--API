@@ -4,28 +4,39 @@ export default class home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      item: [],
+      items: [],
       loaded: false
     };
   }
 
   componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/albums")
+    fetch("https://jsonplaceholder.typicode.com/comments")
       .then(res => res.json())
       .then(json => {
         this.setState({
-          item: json,
+          items: json,
           loaded: true
         });
       });
   }
   render() {
-    const { loaded, item } = this.state;
+    var { loaded, items } = this.state;
 
     if (!loaded) {
       return <div>Wait...</div>;
     } else {
-      return <div>Data has been loaded</div>;
+      return (
+        <div>
+          <ul>
+            {items.map(item => (
+              <li key={item.id}>
+                <p> Name : {item.name}</p>
+                <p>Email : {item.email}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
     }
   }
 }
