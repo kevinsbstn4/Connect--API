@@ -24,7 +24,8 @@ export default class home extends Component {
 
     if (!loaded) {
       return <div>Wait...</div>;
+    } else {
+      return <div>Data has been loaded</div>;
     }
-    return <div />;
   }
 }
