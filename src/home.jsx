@@ -10,9 +10,21 @@ export default class home extends Component {
   }
 
   componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/albums");
+    fetch("https://jsonplaceholder.typicode.com/albums")
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          item: json,
+          loaded: true
+        });
+      });
   }
   render() {
+    const { loaded, item } = this.state;
+
+    if (!loaded) {
+      return <div>Wait...</div>;
+    }
     return <div />;
   }
 }
